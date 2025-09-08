@@ -41,6 +41,16 @@ Or for development:
 pip install -e .
 ```
 
+### Installing the Published Package
+
+Once published to PyPI, you can install Terra Command AI using:
+
+```bash
+pip install terra-tai
+```
+
+This will install the `terra-tai` command globally on your system.
+
 ### Configuration
 
 **Easy Setup:**
