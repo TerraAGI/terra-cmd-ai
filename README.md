@@ -44,7 +44,7 @@ pip install -e .
 ### Configuration
 
 **Easy Setup:**
-Terra AI provides a simple interactive setup process:
+Terra Command AI provides a simple interactive setup process:
 
 1. **Setup AI Features:**
 
@@ -60,7 +60,7 @@ Terra AI provides a simple interactive setup process:
    - Windows: `%USERPROFILE%\\.config\\terra-ai\\config`
 
 **Fallback Mode:**
-If you choose not to set up AI or if the OpenAI package is not available, Terra AI will automatically fall back to using predefined command patterns. All basic functionality will still work without any additional configuration!
+If you choose not to set up AI or if the OpenAI package is not available, Terra Command AI will automatically fall back to using predefined command patterns. All basic functionality will still work without any additional configuration!
 
 ### Direct Installation
 

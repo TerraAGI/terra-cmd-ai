@@ -1,7 +1,7 @@
 """
 Terra Command Main Interface
 
-This module provides the main interface class for Terra AI,
+This module provides the main interface class for Terra Command AI,
 combining all components into a cohesive command-line tool.
 """
 
@@ -17,9 +17,9 @@ from ..config.setup import SetupManager
 
 class TerraCommand:
     """
-    Main Terra AI command interface.
+    Main Terra Command AI command interface.
 
-    This class provides the primary interface for the Terra AI tool,
+    This class provides the primary interface for the Terra Command AI tool,
     handling command interpretation, execution, and user interaction.
     """
 
@@ -60,7 +60,7 @@ class TerraCommand:
         ai_status = "✓ AI-powered" if self.interpreter.is_ai_enabled() else "✗ Fallback mode"
         os_info = self.os_detector.get_os_info()
 
-        print(f"Terra AI - {ai_status}")
+        print(f"Terra Command AI - {ai_status}")
         print(f"Operating System: {os_info}")
         print()
         print("Usage: tai <instruction>")
@@ -78,7 +78,7 @@ class TerraCommand:
         print("  --force         Execute without confirmation")
         print()
         if not self.interpreter.is_ai_enabled():
-            print("Note: AI is not configured. Terra AI works with fallback commands,")
+            print("Note: AI is not configured. Terra Command AI works with fallback commands,")
             print("      but you can enable AI features with: tai --setup-ai")
 
     def list_available_commands(self) -> None:
@@ -86,7 +86,7 @@ class TerraCommand:
         ai_status = "✓ AI-powered" if self.interpreter.is_ai_enabled() else "✗ Fallback mode"
         os_info = self.os_detector.get_os_info()
 
-        print(f"Terra AI - {ai_status}")
+        print(f"Terra Command AI - {ai_status}")
         print(f"Operating System: {os_info}")
         print("\nAvailable commands (fallback patterns):")
 
@@ -103,7 +103,7 @@ class TerraCommand:
         print("  - 'show system temperature'")
 
         if not self.interpreter.is_ai_enabled():
-            print("\nNote: AI is not configured. Terra AI works with fallback commands,")
+            print("\nNote: AI is not configured. Terra Command AI works with fallback commands,")
             print("      but you can enable AI features with: tai --setup-ai")
 
     def show_status(self) -> None:
@@ -111,7 +111,7 @@ class TerraCommand:
         os_info = self.os_detector.get_os_info()
         ai_available = self.interpreter.is_ai_enabled()
 
-        print("Terra AI Status")
+        print("Terra Command AI Status")
         print("=" * 25)
         print(f"Operating System: {os_info}")
         print(f"Python Version: {platform.python_version()}")

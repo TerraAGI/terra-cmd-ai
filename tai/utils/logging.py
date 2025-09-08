@@ -1,8 +1,8 @@
 """
-Logging Utilities for Terra AI
+Logging Utilities for Terra Command AI
 
 This module provides logging configuration and utilities for consistent
-logging across all Terra AI components.
+logging across all Terra Command AI components.
 """
 
 import logging
@@ -17,7 +17,7 @@ def setup_logging(
     verbose: bool = False
 ) -> logging.Logger:
     """
-    Set up logging configuration for Terra AI.
+    Set up logging configuration for Terra Command AI.
 
     Args:
         level: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)

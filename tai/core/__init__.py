@@ -1,5 +1,5 @@
 """
-Core components of Terra AI
+Core components of Terra Command AI
 """
 
 from .interpreter import CommandInterpreter

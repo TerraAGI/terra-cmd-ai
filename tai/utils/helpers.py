@@ -1,7 +1,7 @@
 """
-Helper Functions for Terra AI
+Helper Functions for Terra Command AI
 
-This module contains utility functions used throughout Terra AI,
+This module contains utility functions used throughout Terra Command AI,
 including API key validation, safe execution helpers, and common utilities.
 """
 
@@ -25,18 +25,45 @@ def validate_api_key(api_key: str) -> Tuple[bool, str]:
     if not api_key:
         return False, "API key cannot be empty"
 
-    if not api_key.startswith('sk-'):
-        return False, "API key should start with 'sk-'"
+    # OpenAI API keys start with 'sk-' or 'sk-proj-'
+    if not (api_key.startswith('sk-') or api_key.startswith('sk-proj-')):
+        return False, "API key should start with 'sk-' or 'sk-proj-'"
 
+    # Check reasonable length (OpenAI API keys are typically 50-200 characters)
     if len(api_key) < 20:
         return False, "API key seems too short"
+    if len(api_key) > 300:
+        return False, "API key seems too long"
 
-    # Basic pattern validation
-    pattern = r'^sk-[a-zA-Z0-9]{48,}$'
-    if not re.match(pattern, api_key):
-        return False, "API key format appears invalid"
+    # Basic pattern validation for OpenAI API keys
+    # Should contain only alphanumeric characters, hyphens, and underscores after the prefix
+    remaining = api_key[3:] if api_key.startswith('sk-') else api_key[8:] if api_key.startswith('sk-proj-') else api_key
+    if not re.match(r'^[a-zA-Z0-9\-_]+$', remaining):
+        return False, "API key contains invalid characters after prefix"
 
-    return True, "API key format is valid"
+    return True, "API key format appears valid"
+
+
+def clean_command(command: str) -> str:
+    """
+    Clean a command string by removing unnecessary quotes and formatting.
+
+    Args:
+        command: Raw command string
+
+    Returns:
+        str: Cleaned command string
+    """
+    # Remove surrounding quotes if they exist
+    command = command.strip()
+    if (command.startswith('"') and command.endswith('"')) or \
+       (command.startswith("'") and command.endswith("'")):
+        command = command[1:-1]
+
+    # Remove any extra whitespace
+    command = command.strip()
+
+    return command
 
 
 def safe_execute(
@@ -56,6 +83,9 @@ def safe_execute(
         Tuple[bool, str, str]: (success, stdout, stderr)
     """
     try:
+        # Clean the command first
+        command = clean_command(command)
+
         # Use shlex to properly split the command
         cmd_args = shlex.split(command)
 
@@ -80,24 +110,15 @@ def safe_execute(
 
 def find_config_file() -> Optional[Path]:
     """
-    Find the Terra AI configuration file.
+    Find the Terra Command AI configuration file.
 
-    Searches in current directory, home directory, and system locations.
+    Returns the standard config file location used by Terra Command AI.
 
     Returns:
-        Optional[Path]: Path to config file if found
+        Optional[Path]: Path to config file if it exists
     """
-    search_paths = [
-        Path.cwd() / '.env',
-        Path.home() / '.env',
-        Path.home() / '.config' / 'terra-ai' / '.env',
-    ]
-
-    for path in search_paths:
-        if path.exists():
-            return path
-
-    return None
+    config_path = Path.home() / '.config' / 'terra-ai' / 'config'
+    return config_path if config_path.exists() else None
 
 
 def ensure_directory(path: str) -> bool:

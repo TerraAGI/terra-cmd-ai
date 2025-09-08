@@ -16,8 +16,8 @@ class TestSettings(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures."""
         self.temp_dir = Path(tempfile.mkdtemp())
-        self.env_file = self.temp_dir / '.env'
-        self.settings = Settings(str(self.env_file))
+        self.config_file = self.temp_dir / 'config'
+        self.settings = Settings(str(self.config_file))
 
     def tearDown(self):
         """Clean up test fixtures."""
@@ -67,7 +67,7 @@ class TestSettings(unittest.TestCase):
         self.assertTrue(self.settings.save())
 
         # Create new settings instance
-        new_settings = Settings(str(self.env_file))
+        new_settings = Settings(str(self.config_file))
 
         # Check if values were loaded
         self.assertEqual(new_settings.get('test_key'), 'test_value')

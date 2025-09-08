@@ -103,7 +103,7 @@ ENV/
 env.bak/
 venv.bak/
 
-# Terra AI config (auto-generated)
+# Terra Command AI config (auto-generated)
 .config/terra-ai/
 
 # Spyder project settings

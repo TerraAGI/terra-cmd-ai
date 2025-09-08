@@ -1,6 +1,6 @@
-# Contributing to Terra AI
+# Contributing to Terra Command AI
 
-Thank you for your interest in contributing to Terra AI! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to Terra Command AI! This document provides guidelines and information for contributors.
 
 ## Table of Contents
 
@@ -76,16 +76,11 @@ This project follows a code of conduct to ensure a welcoming environment for all
 
 ### Configuration
 
-1. Copy the environment template:
-
-   ```bash
-   cp env_example.txt .env
-   ```
-
-2. Edit `.env` and add your OpenAI API key if you have one:
+Edit `.env` and add your OpenAI API key and Model if you have one:
 
    ```bash
    OPENAI_API_KEY=your_api_key_here
+   OPENAI_MODEL=your_open_ai_model
    ```
 
 ## Making Changes
@@ -307,7 +302,7 @@ When reporting bugs, please include:
 - **Steps to reproduce**: Step-by-step instructions
 - **Expected behavior**: What should happen
 - **Actual behavior**: What actually happens
-- **Environment**: OS, Python version, Terra AI version
+- **Environment**: OS, Python version, Terra Command AI version
 - **Logs**: Any relevant error messages or logs
 
 ### Feature Requests

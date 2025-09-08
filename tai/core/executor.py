@@ -1,5 +1,5 @@
 """
-Command Executor for Terra AI
+Command Executor for Terra Command AI
 
 This module handles the safe execution of shell commands with proper
 error handling, timeout management, and output formatting.
@@ -12,7 +12,7 @@ import os
 from typing import Tuple, Optional
 
 from ..utils.logging import get_logger
-from ..utils.helpers import safe_execute, format_command_output
+from ..utils.helpers import safe_execute, format_command_output, clean_command
 
 
 class CommandExecutor:
@@ -65,6 +65,8 @@ class CommandExecutor:
         if self.verbose:
             print(f"Executing: {command}")
 
+        # Clean the command before execution
+        command = clean_command(command)
         success, stdout, stderr = safe_execute(command, timeout, cwd=os.getcwd())
 
         if success:

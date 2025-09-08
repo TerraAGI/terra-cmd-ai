@@ -1,5 +1,5 @@
 """
-Main Command Interpreter for Terra AI
+Main Command Interpreter for Terra Command AI
 
 This module provides the primary interface for interpreting natural language
 instructions into shell commands, combining AI-powered generation with

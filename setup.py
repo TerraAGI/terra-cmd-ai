@@ -12,14 +12,14 @@ try:
     with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
         long_description = f.read()
 except FileNotFoundError:
-    long_description = "Terra AI - A natural language shell command tool with AI for zsh/bash"
+    long_description = "Terra Command AI - A natural language shell command tool with AI for zsh/bash"
 
 setup(
     name="tai",
     version="0.1.0",
     author="Terra AGI",
     author_email="contact@terra-agi.com",
-    description="Terra AI - A natural language shell command tool with AI",
+    description="Terra Command AI - A natural language shell command tool with AI",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/terra-agi/terra-commands",

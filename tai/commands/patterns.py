@@ -1,5 +1,5 @@
 """
-Command Patterns Module for Terra AI
+Command Patterns Module for Terra Command AI
 
 This module contains predefined command patterns that serve as fallbacks
 when AI is not available or fails to generate appropriate commands.
