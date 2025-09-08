@@ -1,7 +1,7 @@
 """
-Terra AI - A natural language shell command tool with AI
+Terra Command AI - A natural language shell command tool with AI
 
-Terra AI allows you to execute shell commands using natural language instructions,
+Terra Command AI allows you to execute shell commands using natural language instructions,
 with optional AI-powered command generation for enhanced capabilities.
 """
 

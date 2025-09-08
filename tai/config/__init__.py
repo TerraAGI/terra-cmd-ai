@@ -1,5 +1,5 @@
 """
-Configuration management for Terra AI
+Configuration management for Terra Command AI
 """
 
 from .settings import Settings

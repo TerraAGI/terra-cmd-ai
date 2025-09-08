@@ -1,7 +1,7 @@
 """
-Command Line Interface for Terra AI
+Command Line Interface for Terra Command AI
 
-This module provides the command-line interface for Terra AI,
+This module provides the command-line interface for Terra Command AI,
 handling argument parsing and user interaction.
 """
 
@@ -16,13 +16,13 @@ from .utils.logging import setup_logging
 
 def create_parser() -> argparse.ArgumentParser:
     """
-    Create the argument parser for Terra AI.
+    Create the argument parser for Terra Command AI.
 
     Returns:
         argparse.ArgumentParser: Configured argument parser
     """
     parser = argparse.ArgumentParser(
-        description="Terra AI - Execute shell commands using natural language with AI",
+        description="Terra Command AI - Execute shell commands using natural language with AI",
         prog="tai"
     )
 
@@ -85,7 +85,7 @@ def create_parser() -> argparse.ArgumentParser:
 
 def main() -> int:
     """
-    Main entry point for Terra AI CLI.
+    Main entry point for Terra Command AI CLI.
 
     Returns:
         int: Exit code (0 for success, 1 for error)
@@ -99,7 +99,7 @@ def main() -> int:
         log_file=args.log_file
     )
 
-    # Initialize settings and Terra AI
+    # Initialize settings and Terra Command AI
     settings = Settings()
     settings.set('verbose', args.verbose)
     terra_cmd = TerraCommand(settings)

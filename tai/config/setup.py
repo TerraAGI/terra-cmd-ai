@@ -1,8 +1,8 @@
 """
-Setup Manager for Terra AI
+Setup Manager for Terra Command AI
 
 This module handles the interactive setup process for configuring
-Terra AI, including API key setup and initial configuration.
+Terra Command AI, including API key setup and initial configuration.
 """
 
 import sys
@@ -16,7 +16,7 @@ from .settings import Settings
 
 class SetupManager:
     """
-    Interactive setup manager for Terra AI configuration.
+    Interactive setup manager for Terra Command AI configuration.
 
     This class handles the complete setup process including
     API key configuration and initial preferences.
@@ -39,11 +39,11 @@ class SetupManager:
         Returns:
             bool: True if setup completed successfully
         """
-        print("\n🌟 Welcome to Terra AI!")
-        print("Terra AI uses OpenAI's GPT models to convert natural language into shell commands.")
+        print("\n🌟 Welcome to Terra Command AI!")
+        print("Terra Command AI uses OpenAI's GPT models to convert natural language into shell commands.")
         print("\n📝 To enable AI features, you'll need an OpenAI API key.")
         print("   • Get your API key from: https://platform.openai.com/api-keys")
-        print("   • The key is stored locally in a .env file for your security")
+        print("   • The key is stored securely in your config directory")
 
         try:
             choice = self._get_user_choice()
@@ -132,8 +132,8 @@ class SetupManager:
 
             if self.settings.save():
                 self.logger.info("API key saved successfully")
-                print("✅ AI setup complete! Terra AI is now enhanced with OpenAI.")
-                print("   Your API key is stored securely in .env file.")
+                print("✅ AI setup complete! Terra Command AI is now enhanced with OpenAI.")
+                print("   Your API key is stored securely in your config directory.")
                 return True
             else:
                 print("❌ Failed to save configuration.")
@@ -151,7 +151,7 @@ class SetupManager:
         Returns:
             bool: True (fallback mode is always available)
         """
-        print("ℹ️  No problem! Terra AI will work with fallback commands.")
+        print("ℹ️  No problem! Terra Command AI will work with fallback commands.")
         print("   You can set up AI features later by running: tai --setup-ai")
         return True
 

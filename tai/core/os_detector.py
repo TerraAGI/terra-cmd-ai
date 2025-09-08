@@ -1,5 +1,5 @@
 """
-OS Detection Module for Terra AI
+OS Detection Module for Terra Command AI
 
 This module provides operating system detection and OS-specific information
 to help generate appropriate shell commands for different platforms.

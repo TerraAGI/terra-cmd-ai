@@ -1,14 +1,14 @@
-# Makefile for Terra AI development
+# Makefile for Terra Command AI development
 
 .PHONY: help install install-dev test test-verbose test-coverage lint format clean clean-all build publish docs check dev-setup
 
 # Default target
 help:
-	@echo "Terra AI Development Commands:"
+	@echo "Terra Command AI Development Commands:"
 	@echo ""
 	@echo "Installation:"
-	@echo "  install       Install Terra AI"
-	@echo "  install-dev   Install Terra AI in development mode"
+	@echo "  install       Install Terra Command AI"
+	@echo "  install-dev   Install Terra Command AI in development mode"
 	@echo "  dev-setup     Set up development environment"
 	@echo ""
 	@echo "Testing:"

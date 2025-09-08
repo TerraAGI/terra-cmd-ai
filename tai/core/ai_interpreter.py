@@ -1,5 +1,5 @@
 """
-AI Command Interpreter for Terra AI
+AI Command Interpreter for Terra Command AI
 
 This module handles AI-powered command generation using OpenAI's GPT models.
 It provides intelligent interpretation of natural language instructions into
@@ -10,14 +10,15 @@ import sys
 from typing import Optional
 
 from ..utils.logging import get_logger
+from ..utils.helpers import clean_command
 from ..core.os_detector import OSDetector
 from ..config.settings import Settings
 
 try:
-    import openai
+    from openai import OpenAI
     AI_AVAILABLE = True
 except ImportError:
-    openai = None
+    OpenAI = None
     AI_AVAILABLE = False
 
 
@@ -39,10 +40,29 @@ class AICommandInterpreter:
         self.settings = settings or Settings()
         self.os_detector = OSDetector()
         self.logger = get_logger(__name__)
+        self.client = None
 
         # Configure OpenAI if available
         if AI_AVAILABLE and self.settings.get_openai_api_key():
-            openai.api_key = self.settings.get_openai_api_key()
+            try:
+                # Create client with explicit httpx configuration to avoid proxy issues
+                import httpx
+                # Create httpx client without proxy configuration
+                http_client = httpx.Client()
+                self.client = OpenAI(
+                    api_key=self.settings.get_openai_api_key(),
+                    http_client=http_client
+                )
+            except TypeError as e:
+                # If httpx client creation fails due to TypeError, try without custom client
+                try:
+                    self.client = OpenAI(api_key=self.settings.get_openai_api_key())
+                except Exception:
+                    self.logger.warning("OpenAI client initialization failed. AI features will be disabled.")
+                    self.client = None
+            except Exception as e:
+                self.logger.warning(f"Failed to initialize OpenAI client: {e}")
+                self.client = None
 
     def is_ai_available(self) -> bool:
         """
@@ -66,7 +86,7 @@ class AICommandInterpreter:
         Returns:
             Optional[str]: Generated shell command or None if failed
         """
-        if not self.is_ai_available():
+        if not self.is_ai_available() or not self.client:
             return None
 
         os_info = self.os_detector.get_os_info()
@@ -95,7 +115,7 @@ Command:"""
         try:
             ai_config = self.settings.get_ai_config()
 
-            response = openai.chat.completions.create(
+            response = self.client.chat.completions.create(
                 model=ai_config['model'],
                 messages=[
                     {"role": "system", "content": "You are a shell command generator."},
@@ -112,8 +132,10 @@ Command:"""
 
             # Validate the command
             if command and self._is_valid_command(command):
-                self.logger.debug(f"Generated command: {command}")
-                return command
+                # Clean the command before returning
+                cleaned_command = clean_command(command)
+                self.logger.debug(f"Generated command: {cleaned_command}")
+                return cleaned_command
 
         except Exception as e:
             self.logger.error(f"AI command generation failed: {e}")
@@ -194,12 +216,12 @@ Command:"""
         Returns:
             bool: True if connection successful
         """
-        if not self.is_ai_available():
+        if not self.is_ai_available() or not self.client:
             return False
 
         try:
             # Simple test query
-            response = openai.chat.completions.create(
+            response = self.client.chat.completions.create(
                 model=self.settings.get('openai_model'),
                 messages=[{"role": "user", "content": "Hello"}],
                 max_tokens=10
